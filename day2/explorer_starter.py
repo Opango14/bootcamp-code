@@ -28,3 +28,22 @@ def show_blockchain_info():
     print(f"Difficulty: {info['difficulty']}")
 
 show_blockchain_info()
+
+def show_wallet_balance(wallet_name):
+    """
+    TODO:
+    1. Load wallet (try/except)
+    2. Call rpc("getbalance", [], wallet=wallet_name)
+    3. Print the balance
+    """
+    try:
+        rpc("loadwallet", [wallet_name])
+    except:
+        pass
+
+    balance = rpc("getbalance", [], wallet=wallet_name)
+
+    print(f"=== Wallet: {wallet_name} ===")
+    print(f"Balance: {balance} BTC")
+
+show_wallet_balance(wallet_name="alice")
