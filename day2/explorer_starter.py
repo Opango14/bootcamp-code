@@ -14,9 +14,17 @@ def rpc(method, params=None, wallet=None):
         auth=("bootcamp", "bootcamp123"))
     return resp.json()["result"]
 
-info = rpc("getblockchaininfo")
-print(f"Chain: {info['chain']}")
-print(f"Blocks: {info['blocks']}")
+def show_blockchain_info():
+    """
+    TODO:
+    1. Call rpc("getblockchaininfo")
+    2. Print: chain, blocks, difficulty
+    """
+    info = rpc("getblockchaininfo")
 
-balance = rpc("getbalance", [], wallet="bob")
-print(f"Bob has {balance} BTC")
+    print("=== Blockchain Info ===")
+    print(f"Chain:      {info['chain']}")
+    print(f"Blocks:     {info['blocks']}")
+    print(f"Difficulty: {info['difficulty']}")
+
+show_blockchain_info()
