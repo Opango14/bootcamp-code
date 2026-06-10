@@ -95,3 +95,22 @@ def decode_transaction(txid):
         print(f"  To: {addr} Amount: {value}")
 
 decode_transaction(txid="e2dcb2d1840817ed3ceda6bb7f7757afec7084c3303691091492ca53724fb4f9")
+
+def show_block(blockhash=None):
+    """
+    TODO:
+    1. if no hash: rpc("getbestblockhash")
+    2. Call rpc("getblock", [blockhash, 1])
+    3. Print: height, hash, time, tx count
+    """
+    if blockhash is None:
+        blockhash = rpc("getblockhash")
+
+    block = rpc("getblock", [blockhash, 1])
+
+    print(f"=== Block #{block['height']} ===")
+    print(f"Hash: {block['hash'][:32]}...")
+    print(f"Time: {block['time']}")
+    print(f"Transactions: {block['nTx']}")
+
+show_block(blockhash="210190495f87173b60c4a5aea2954acc31ecf0a19e7cd8e55a2b5764f9f5c458")
