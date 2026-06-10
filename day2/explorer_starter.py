@@ -47,3 +47,26 @@ def show_wallet_balance(wallet_name):
     print(f"Balance: {balance} BTC")
 
 show_wallet_balance(wallet_name="alice")
+
+def list_transactions(wallet_name, count=5):
+    """
+    TODO:
+    1. Call rpc("listtransactions", ["*", count], wallet=wallet_name)
+    2. For each tx: print direction, amount, txid
+    """
+    try:
+        rpc("loadwallet", [wallet_name])
+    except:
+        pass
+
+    txs = rpc("listtransactions", ["*", count], wallet=wallet_name)
+
+    for tx in txs:
+        if tx['category'] in ('receive', 'generate', 'immature'):
+            direction = "IN"
+        else:
+            direction = "OUT"
+
+        print(f"{direction} {tx['amount']:+.8f} BTC")
+
+list_transactions(wallet_name="alice")
